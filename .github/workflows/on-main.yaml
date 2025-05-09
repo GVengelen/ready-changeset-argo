@@ -5,6 +5,12 @@ on:
     branches:
       - main
 
+# These permissions are needed for the GitHub token
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
