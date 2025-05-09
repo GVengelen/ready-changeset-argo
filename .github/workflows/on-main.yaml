@@ -31,5 +31,10 @@ jobs:
 
       - name: Create Release Pull Request
         uses: changesets/action@v1
+        with:
+          setupGitUser: true
+          createGithubReleases: true
+          commitMode: git-cli
         env:
+          PNPM_HOME: /runner/setup-pnpm/node_modules/.bin
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
