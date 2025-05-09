@@ -1,0 +1,39 @@
+# Base image for Next.js applications in a Turborepo with pnpm
+FROM node:18-alpine AS base
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
+
+# Set working directory
+WORKDIR /app
+
+# Set pnpm store directory to avoid issues with volume mounting
+ENV PNPM_HOME="/app/.pnpm"
+ENV PATH="${PNPM_HOME}:${PATH}"
+
+# Set production environment
+ENV NODE_ENV=production
+
+# Install dependencies only when needed
+FROM base AS deps
+# Copy root package.json and workspace configuration
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+# Copy all package.json files from apps and packages
+COPY apps/*/package.json ./apps/
+COPY packages/*/package.json ./packages/
+
+# Install dependencies with pnpm 
+# Use --frozen-lockfile to ensure consistency
+# Use --filter to install only production dependencies for the specific app
+RUN --mount=type=cache,id=pnpm-store,target=/app/.pnpm-store \
+    pnpm install --frozen-lockfile --prefer-offline
+
+# Builder stage for all workspace packages
+FROM base AS builder
+# Copy all files from deps stage
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/.pnpm-store ./.pnpm-store
+# Copy all source files
+COPY . .
+# Don't run unnecessary scripts for installation
+ENV SKIP_INSTALL_DEPS=true
