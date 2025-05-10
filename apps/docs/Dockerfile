@@ -28,7 +28,7 @@ RUN --mount=type=cache,id=pnpm-store,target=/app/.pnpm-store \
 # Build the app
 FROM base AS builder
 COPY --from=deps /app .
-COPY apps/web ./apps/web
+COPY apps/docs ./apps/docs
 COPY packages ./packages
 
 # Build the application using Turborepo
