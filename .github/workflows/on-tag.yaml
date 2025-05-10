@@ -1,0 +1,24 @@
+name: On-Tag
+
+on:
+  push:
+    tags:
+      - '**@*.*.*'
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Handle Package-Specific Tag
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          echo "Processing tag: $TAG"
+          if [[ $TAG =~ ^(.+)@([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            PACKAGE_NAME=${BASH_REMATCH[1]}
+            VERSION=${BASH_REMATCH[2]}
+            echo "✅ Successfully processed package '$PACKAGE_NAME' at version '$VERSION'"
+            # Add your package-specific processing logic here in the future
+          else
+            echo "Tag format does not match expected pattern (packageName@x.y.z)"
+          fi
