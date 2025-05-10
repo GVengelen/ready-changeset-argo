@@ -55,7 +55,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Tag Release
-        if: steps.changesets.outputs.hasChangesets == 'false' 
+        if: steps.changesets.outputs.hasChangesets == 'false' && contains(github.event.head_commit.message, 'Version Packages')
         run: |
           pnpm run changeset:tag
           git push origin main --follow-tags

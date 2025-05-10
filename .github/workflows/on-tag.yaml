@@ -3,7 +3,8 @@ name: On-Tag
 on:
   push:
     tags:
-      - '**@*.*.*'
+      - 'docs@*.*.*'
+      - 'web@*.*.*'
 
 jobs:
   release:
