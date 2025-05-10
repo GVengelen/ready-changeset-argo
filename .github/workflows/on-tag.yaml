@@ -55,7 +55,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: apps/${{ steps.extract.outputs.package_name }}
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
