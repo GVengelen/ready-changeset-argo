@@ -46,7 +46,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Tag Release
-        if: steps.changesets.outputs.hasChangesets == 'false' && github.ref == 'refs/heads/changeset-release/main'
+        if: steps.changesets.outputs.hasChangesets == 'false' && contains(github.event.head_commit.message, 'Version Packages')
         run: |
+          # Create tags with changeset
           pnpm run changeset:tag
+          # Push the tags to the remote repository
+          git push --tags
           git push --tags
