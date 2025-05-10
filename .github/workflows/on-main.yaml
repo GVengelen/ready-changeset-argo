@@ -52,10 +52,10 @@ jobs:
           commitMode: github-api
         env:
           PNPM_HOME: /runner/setup-pnpm/node_modules/.bin
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TAG_AUTOMATION }}
       
       - name: Tag Release
-        if: steps.changesets.outputs.hasChangesets == 'false' && contains(github.event.head_commit.message, 'Version Packages')
+        if: steps.changesets.outputs.hasChangesets == 'false'
         run: |
           pnpm run changeset:tag
           git push origin main --follow-tags
