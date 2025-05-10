@@ -1,5 +1,11 @@
 # docs
 
+## 0.6.0
+
+### Minor Changes
+
+- e86a843: create a changeset for testing purposes
+
 ## 0.5.0
 
 ### Minor Changes
