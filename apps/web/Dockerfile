@@ -17,22 +17,23 @@ FROM base AS deps
 # Copy root workspace files
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY turbo.json ./
-# Copy all package.json files
-COPY apps/web/package.json ./apps/web/
-COPY packages/*/package.json ./packages/
 
-# Install dependencies
+# Copy the entire packages directory including source files
+COPY packages ./packages
+
+# Copy the web app
+COPY apps/web ./apps/web
+
+# Install dependencies for the entire workspace
 RUN --mount=type=cache,id=pnpm-store,target=/app/.pnpm-store \
     pnpm install --frozen-lockfile --prefer-offline
 
 # Build the app
 FROM base AS builder
 COPY --from=deps /app .
-COPY apps/web ./apps/web
-COPY packages ./packages
 
-# Build the application using Turborepo
-RUN pnpm turbo run build --filter=web...
+# First ensure all dependencies are built
+RUN pnpm turbo run build --filter="@repo/ui..." --filter="web..."
 
 # Production image, copy all the files and run next
 FROM base AS runner
