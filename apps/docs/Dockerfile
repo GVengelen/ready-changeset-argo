@@ -16,6 +16,7 @@ ENV PATH="${PNPM_HOME}:${PATH}"
 FROM base AS deps
 # Copy root workspace files
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY turbo.json ./
 # Copy all package.json files
 COPY apps/docs/package.json ./apps/docs/
 COPY packages/*/package.json ./packages/
@@ -26,8 +27,9 @@ RUN --mount=type=cache,id=pnpm-store,target=/app/.pnpm-store \
 
 # Build the app
 FROM base AS builder
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+COPY --from=deps /app .
+COPY apps/web ./apps/web
+COPY packages ./packages
 
 # Build the application using Turborepo
 RUN pnpm turbo run build --filter=docs...
