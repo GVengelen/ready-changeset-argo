@@ -11,6 +11,9 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
       - name: Extract Package Name and Version
         id: extract
         run: |
