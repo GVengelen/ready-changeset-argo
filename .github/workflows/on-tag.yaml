@@ -11,15 +11,38 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: Handle Package-Specific Tag
+      - name: Extract Package Name and Version
+        id: extract
         run: |
           TAG=${GITHUB_REF#refs/tags/}
-          echo "Processing tag: $TAG"
           if [[ $TAG =~ ^(.+)@([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
             PACKAGE_NAME=${BASH_REMATCH[1]}
             VERSION=${BASH_REMATCH[2]}
-            echo "✅ Successfully processed package '$PACKAGE_NAME' at version '$VERSION'"
-            # Add your package-specific processing logic here in the future
+            echo "package_name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
+            echo "version=$VERSION" >> $GITHUB_OUTPUT
           else
-            echo "Tag format does not match expected pattern (packageName@x.y.z)"
+            echo "Tag format does not match expected pattern (packageName@x.y.z)" >&2
+            exit 1
           fi
+
+      - name: Log extracted values
+        run: |
+          echo "Package: ${{ steps.extract.outputs.package_name }}"
+          echo "Version: ${{ steps.extract.outputs.version }}"
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: apps/${{ steps.extract.outputs.package_name }}
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/${{ steps.extract.outputs.package_name }}:${{ steps.extract.outputs.version }}
+            ghcr.io/${{ github.repository_owner }}/${{ steps.extract.outputs.package_name }}:latest
