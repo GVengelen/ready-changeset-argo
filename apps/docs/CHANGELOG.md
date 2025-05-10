@@ -1,5 +1,11 @@
 # docs
 
+## 0.4.0
+
+### Minor Changes
+
+- f8a3694: fix: update text for clarity in the instructions list
+
 ## 0.3.0
 
 ### Minor Changes
