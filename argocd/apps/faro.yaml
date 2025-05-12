@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: faro
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/GVengelen/faro-nextjs-example
+    path: charts/faro
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+      values: |
+        image:
+          tag: 57cf7ad
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: faro
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
