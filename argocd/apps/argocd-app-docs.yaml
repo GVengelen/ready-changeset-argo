@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: docs
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/GVengelen/ready-changeset-argo.git'
+    targetRevision: HEAD
+    path: charts/next-app
+    helm:
+      values: |
+        fullnameOverride: docs
+        image:
+          repository: ghcr.io/gvengelen/ready-changeset-argo-docs
+          tag: a40d870
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: docs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

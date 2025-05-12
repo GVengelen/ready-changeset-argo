@@ -33,3 +33,6 @@ Now that we got Argo CD up and running it's time to bootstrap our cluster so tha
 ```shell
 kubectl apply -f ./argocd/app-of-apps.yaml
 ```
+
+You should now see two apps appear in the application overview in Argo CD.
+

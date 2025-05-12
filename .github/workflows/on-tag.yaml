@@ -58,7 +58,7 @@ jobs:
           context: .
           file: apps/${{ steps.extract.outputs.package_name }}/Dockerfile
           push: true
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/arm64 ##change to linux/amd64 if you want to build for x86
           tags: |
-            ghcr.io/${{ steps.meta.outputs.repo }}:${{ steps.meta.outputs.short_sha }}
+            ghcr.io/${{ steps.meta.outputs.repo }}-${{ steps.extract.outputs.package_name }}:${{ steps.meta.outputs.short_sha }}
             ghcr.io/${{ steps.meta.outputs.repo }}:latest
