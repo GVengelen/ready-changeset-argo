@@ -3,20 +3,27 @@ kind: Application
 metadata:
   name: web
   namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: "web=ghcr.io/gvengelen/ready-changeset-argo-web"
+    argocd-image-updater.argoproj.io/web.helm.image-tag: image.tag
+    argocd-image-updater.argoproj.io/web.helm.image-name: image.repository
+    argocd-image-updater.argoproj.io/web.update-strategy: "newest-build"
+    argocd-image-updater.argoproj.io/write-back-method: "git:secret:argocd/ghcr-repo-creds"
+    argocd-image-updater.argoproj.io/git-repository: https://github.com/GVengelen/ready-changeset-argo.git
+    argocd-image-updater.argoproj.io/write-back-target: "helmvalues:/argocd/values/argocd-app-web.yaml"
+    argocd-image-updater.argoproj.io/git-branch: main
 spec:
   project: default
-  source:
-    repoURL: 'https://github.com/GVengelen/ready-changeset-argo.git'
-    targetRevision: HEAD
-    path: charts/next-app
-    helm:
-      values: |
-        fullnameOverride: web
-        image:
-          repository: ghcr.io/gvengelen/ready-changeset-argo-web
-          tag: a4ea1a3
-        service:
-          port: 3000
+  sources:
+    - repoURL: https://github.com/GVengelen/ready-changeset-argo.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: 'https://github.com/GVengelen/ready-changeset-argo.git'
+      targetRevision: HEAD
+      path: charts/next-app
+      helm:
+        valueFiles:
+          - $values/argocd/values/argocd-app-web.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: web

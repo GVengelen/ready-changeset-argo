@@ -15,11 +15,11 @@ spec:
         values: |
           config:
             gitCommitTemplate: |
-              build: automatic update of "{{`{{ .AppName }}`}}"
+              build: automatic update of "{{ .AppName }}"
 
-              "{{`{{ range .AppChanges -}}`}}"
-              updates image "{{`{{ .Image }}`}}" tag "{{`{{ .OldTag }}`}}" to "{{`{{ .NewTag }}`}}"
-              "{{`{{ end -}}`}}"        
+              {{ range .AppChanges -}}
+              updates image "{{ .Image }}" tag "{{ .OldTag }}" to "{{ .NewTag }}"
+              {{ end -}}        
             registries:
             - name: GHCR
               api_url: https://ghcr.io/gvengelen/
