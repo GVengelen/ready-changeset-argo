@@ -1,5 +1,11 @@
 # docs
 
+## 0.19.0
+
+### Minor Changes
+
+- 614b5d8: chore: bump for bumpsake
+
 ## 0.18.0
 
 ### Minor Changes

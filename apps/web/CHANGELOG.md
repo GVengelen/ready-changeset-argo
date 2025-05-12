@@ -1,5 +1,11 @@
 # web
 
+## 0.6.0
+
+### Minor Changes
+
+- 614b5d8: chore: bump for bumpsake
+
 ## 0.5.0
 
 ### Minor Changes
