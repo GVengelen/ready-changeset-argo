@@ -36,3 +36,4 @@ kubectl apply -f ./argocd/app-of-apps.yaml
 
 You should now see two apps appear in the application overview in Argo CD.
 
+## Adding Argo CD Image updater

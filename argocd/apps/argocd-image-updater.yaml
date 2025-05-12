@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-image-updater
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+spec:
+  project: argocd
+  sources:
+    - repoURL: 'https://github.com/SchipholRedesign/cp-gitops-infra.git'
+      targetRevision: HEAD
+      ref: values 
+    - repoURL: https://argoproj.github.io/argo-helm
+      targetRevision: 0.11.0
+      chart: argocd-image-updater
+      helm:
+        valueFiles:
+          - $values/apps/{{ .Values.global.solution }}/values/argo-image-updater/values.yaml
+        values: |
+          config:
+            gitCommitTemplate: |
+              build: automatic update of "{{`{{ .AppName }}`}}"
+
+              "{{`{{ range .AppChanges -}}`}}"
+              updates image "{{`{{ .Image }}`}}" tag "{{`{{ .OldTag }}`}}" to "{{`{{ .NewTag }}`}}"
+              "{{`{{ end -}}`}}"        
+            registries:
+            - name: GHCR
+              api_url: https://ghcr.io/GVengelen/
+              prefix: ghcr.io/GVengelen
+              default: true
+            applicationsAPIKind: kubernetes
+            logLevel: info
+            gitCommitUser: "argocd-bot"
+            gitCommitMail: "argocd-bot@example.com"
+            gitCommitSigningKey: ""
+            gitCommitSignOff: "false"
+            gitCommitSigningMethod: "none"
+            disableKubeEvents: "false"
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: argocd
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+    automated:
+      selfHeal: true
+      prune: true
