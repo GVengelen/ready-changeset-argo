@@ -62,3 +62,5 @@ jobs:
           tags: |
             ghcr.io/${{ steps.meta.outputs.repo }}-${{ steps.extract.outputs.package_name }}:${{ steps.meta.outputs.short_sha }}
             ghcr.io/${{ steps.meta.outputs.repo }}:latest
+          cache-from: type=registry,ref=ghcr.io/${{ steps.meta.outputs.repo }}-${{ steps.extract.outputs.package_name }}:buildcache
+          cache-to: type=registry,ref=ghcr.io/${{ steps.meta.outputs.repo }}-${{ steps.extract.outputs.package_name }}:buildcache,mode=max

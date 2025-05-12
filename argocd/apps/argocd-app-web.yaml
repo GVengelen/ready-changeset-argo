@@ -14,7 +14,7 @@ spec:
         fullnameOverride: web
         image:
           repository: ghcr.io/gvengelen/ready-changeset-argo-web
-          tag: a40d870
+          tag: a4ea1a3
   destination:
     server: https://kubernetes.default.svc
     namespace: web
