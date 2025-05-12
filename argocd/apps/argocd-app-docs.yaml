@@ -10,22 +10,20 @@ metadata:
     argocd-image-updater.argoproj.io/docs.update-strategy: "newest-build"
     argocd-image-updater.argoproj.io/write-back-method: "git:secret:argocd/ghcr-repo-creds"
     argocd-image-updater.argoproj.io/git-repository: https://github.com/GVengelen/ready-changeset-argo.git
-    argocd-image-updater.argoproj.io/write-back-target: "helmvalues:/argocd/apps/argocd-app-docs.yaml"
+    argocd-image-updater.argoproj.io/write-back-target: "helmvalues:/argocd/values/argocd-app-docs.yaml"
     argocd-image-updater.argoproj.io/git-branch: main
 spec:
   project: default
-  source:
-    repoURL: 'https://github.com/GVengelen/ready-changeset-argo.git'
-    targetRevision: HEAD
-    path: charts/next-app
-    helm:
-      values: |
-        fullnameOverride: docs
-        image:
-          repository: ghcr.io/gvengelen/ready-changeset-argo-docs
-          tag: a4ea1a3
-        service:
-          port: 3000
+  sources:
+    - repoURL: https://github.com/GVengelen/grafana.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: 'https://github.com/GVengelen/ready-changeset-argo.git'
+      targetRevision: HEAD
+      path: charts/next-app
+      helm:
+        valueFiles:
+          - $values/argocd/values/argocd-app-docs.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: docs
