@@ -3,6 +3,12 @@ kind: Application
 metadata:
   name: docs
   namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/admin.update-strategy: "newest-build"
+    argocd-image-updater.argoproj.io/write-back-method: "git:secret:argocd/argocd-cp-repo"
+    argocd-image-updater.argoproj.io/git-repository: https://github.com/GVengelen/ready-changeset-argo.git
+    argocd-image-updater.argoproj.io/write-back-target: "helmvalues:/argocd/apps/argocd-app-docs.yaml"
+    argocd-image-updater.argoproj.io/git-branch: main
 spec:
   project: default
   source:
