@@ -15,7 +15,7 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/GVengelen/grafana.git
+    - repoURL: https://github.com/GVengelen/ready-changeset-argo.git
       targetRevision: HEAD
       ref: values
     - repoURL: 'https://github.com/GVengelen/ready-changeset-argo.git'
