@@ -1,5 +1,11 @@
 # web
 
+## 0.5.0
+
+### Minor Changes
+
+- 01c39cb: feat: bump version for release
+
 ## 0.3.0
 
 ### Minor Changes
