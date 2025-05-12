@@ -49,7 +49,7 @@ jobs:
         with:
           setupGitUser: true
           createGithubReleases: true
-          commitMode: github-api
+          commitMode: git-cli
         env:
           PNPM_HOME: /runner/setup-pnpm/node_modules/.bin
           GITHUB_TOKEN: ${{ secrets.TAG_AUTOMATION }}
