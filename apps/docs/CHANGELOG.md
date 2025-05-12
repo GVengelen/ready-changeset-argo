@@ -1,5 +1,11 @@
 # docs
 
+## 0.18.0
+
+### Minor Changes
+
+- 01c39cb: feat: bump version for release
+
 ## 0.6.0
 
 ### Minor Changes
