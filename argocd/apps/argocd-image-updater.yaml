@@ -6,17 +6,12 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "5"
 spec:
-  project: argocd
+  project: default
   sources:
-    - repoURL: 'https://github.com/SchipholRedesign/cp-gitops-infra.git'
-      targetRevision: HEAD
-      ref: values 
     - repoURL: https://argoproj.github.io/argo-helm
       targetRevision: 0.11.0
       chart: argocd-image-updater
       helm:
-        valueFiles:
-          - $values/apps/{{ .Values.global.solution }}/values/argo-image-updater/values.yaml
         values: |
           config:
             gitCommitTemplate: |
