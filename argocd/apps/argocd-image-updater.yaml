@@ -22,8 +22,8 @@ spec:
               "{{`{{ end -}}`}}"        
             registries:
             - name: GHCR
-              api_url: https://ghcr.io/GVengelen/
-              prefix: ghcr.io/GVengelen
+              api_url: https://ghcr.io/gvengelen/
+              prefix: ghcr.io/gvengelen
               default: true
             applicationsAPIKind: kubernetes
             logLevel: info
