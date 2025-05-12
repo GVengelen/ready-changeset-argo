@@ -12,8 +12,6 @@ metadata:
     argocd-image-updater.argoproj.io/git-repository: https://github.com/GVengelen/ready-changeset-argo.git
     argocd-image-updater.argoproj.io/write-back-target: "helmvalues:/argocd/apps/argocd-app-docs.yaml"
     argocd-image-updater.argoproj.io/git-branch: main
-    time="2025-05-12T19:19:15Z" level=error msg="Could not update application spec: could not get creds for repo 'https://github.com/GVengelen/ready-changeset-argo.git': secrets \"argocd-cp-repo\" not found" application=docs
-
 spec:
   project: default
   source:
