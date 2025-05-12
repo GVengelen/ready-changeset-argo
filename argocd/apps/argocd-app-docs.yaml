@@ -8,7 +8,7 @@ metadata:
     argocd-image-updater.argoproj.io/docs.helm.image-tag: image.tag
     argocd-image-updater.argoproj.io/docs.helm.image-repository: image.repository
     argocd-image-updater.argoproj.io/docs.update-strategy: "newest-build"
-    argocd-image-updater.argoproj.io/write-back-method: "git:secret:argocd/github-push-token#token"
+    argocd-image-updater.argoproj.io/write-back-method: "git:secret:argocd/ghcr-repo-creds"
     argocd-image-updater.argoproj.io/git-repository: https://github.com/GVengelen/ready-changeset-argo.git
     argocd-image-updater.argoproj.io/write-back-target: "helmvalues:/argocd/apps/argocd-app-docs.yaml"
     argocd-image-updater.argoproj.io/git-branch: main

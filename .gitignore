@@ -27,6 +27,7 @@ out/
 build
 dist
 
+github_app.yaml
 
 # Debug
 npm-debug.log*
