@@ -15,6 +15,8 @@ spec:
         image:
           repository: ghcr.io/gvengelen/ready-changeset-argo-web
           tag: a4ea1a3
+        service:
+          port: 3000
   destination:
     server: https://kubernetes.default.svc
     namespace: web
