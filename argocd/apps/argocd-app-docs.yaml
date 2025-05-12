@@ -4,6 +4,9 @@ metadata:
   name: docs
   namespace: argocd
   annotations:
+    argocd-image-updater.argoproj.io/image-list: "docs=ghcr.io/gvengelen/ready-changeset-argo-docs"
+    argocd-image-updater.argoproj.io/docs.helm.image-tag: image.tag
+    argocd-image-updater.argoproj.io/docs.helm.image-repository: image.repository
     argocd-image-updater.argoproj.io/admin.update-strategy: "newest-build"
     argocd-image-updater.argoproj.io/write-back-method: "git:secret:argocd/argocd-cp-repo"
     argocd-image-updater.argoproj.io/git-repository: https://github.com/GVengelen/ready-changeset-argo.git
