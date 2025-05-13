@@ -35,8 +35,7 @@ jobs:
           echo "app=$app" >> $GITHUB_OUTPUT
           echo "tag=$formatted_tag" >> $GITHUB_OUTPUT
 
-  # Build and push acc charts
-  build-tst:
+  build:
     needs: [normalize_tag]
     strategy:
       fail-fast: true

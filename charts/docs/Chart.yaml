@@ -1,0 +1,10 @@
+apiVersion: v2
+name: docs
+version: 0.1.0
+description: Helm chart for the docs app, using base as a dependency
+appVersion: "1.0.0"
+type: application
+dependencies:
+  - name: next-app
+    version: 0.2.0
+    repository: oci://ghcr.io/gvengelen/helm

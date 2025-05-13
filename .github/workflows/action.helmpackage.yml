@@ -43,4 +43,5 @@ jobs:
         run: |
           cd ${{ inputs.path }}
           helm package . --version ${{ inputs.helm_version }} --dependency-update
-          helm push ${{ inputs.name }}-${{ inputs.helm_version }}.tgz oci://ghcr.io/${{ github.repository_owner }}/helm
+          owner=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          helm push ./*.tgz oci://ghcr.io/$owner/helm

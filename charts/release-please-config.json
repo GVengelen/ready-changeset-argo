@@ -6,6 +6,20 @@
       "bump-minor-pre-major": false,
       "bump-patch-for-minor-pre-major": false,
       "include-v-in-tag": false
+    },
+     "charts/web": {
+      "package-name": "web-helm",
+      "release-type": "helm",
+      "bump-minor-pre-major": false,
+      "bump-patch-for-minor-pre-major": false,
+      "include-v-in-tag": false
+    },
+     "charts/dev": {
+      "package-name": "dev-helm",
+      "release-type": "helm",
+      "bump-minor-pre-major": false,
+      "bump-patch-for-minor-pre-major": false,
+      "include-v-in-tag": false
     }
   }
 }
