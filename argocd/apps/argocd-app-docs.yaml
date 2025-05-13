@@ -18,7 +18,7 @@ spec:
     - repoURL: https://github.com/GVengelen/ready-changeset-argo.git
       targetRevision: HEAD
       ref: values
-    - repoURL: 'ghcr.io/gvengelen/helm/docs'
+    - repoURL: "ghcr.io/gvengelen/helm"
       chart: docs
       targetRevision: "*"
       helm:
