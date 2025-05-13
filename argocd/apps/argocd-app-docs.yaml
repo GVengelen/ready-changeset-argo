@@ -18,9 +18,8 @@ spec:
     - repoURL: https://github.com/GVengelen/ready-changeset-argo.git
       targetRevision: HEAD
       ref: values
-    - repoURL: 'https://github.com/GVengelen/ready-changeset-argo.git'
-      targetRevision: HEAD
-      path: charts/next-app
+    - repoURL: 'oci://ghcr.io/gvengelen/helm/docs'
+      targetRevision: "*"
       helm:
         valueFiles:
           - $values/argocd/values/argocd-app-docs.yaml
