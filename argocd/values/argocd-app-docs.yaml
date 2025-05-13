@@ -2,6 +2,6 @@ fullnameOverride: docs
 image:
   repository: ghcr.io/gvengelen/ready-changeset-argo-docs
   namee: ready-changeset-argo-docs
-  tag: 6fec730
+  tag: 0c082a5
 service:
   port: 3000
