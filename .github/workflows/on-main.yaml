@@ -59,7 +59,7 @@ jobs:
           commitMode: git-cli
         env:
           PNPM_HOME: /runner/setup-pnpm/node_modules/.bin
-          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Tag Release
         if: steps.changesets.outputs.hasChangesets == 'false' && contains(github.event.head_commit.message, 'Version Packages')
