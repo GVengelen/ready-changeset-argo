@@ -1,0 +1,19 @@
+name: Release Helm Chart
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'charts/**'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  create-release:
+    secrets: inherit
+    strategy:
+      fail-fast: true
+    uses: ./.github/workflows/action.helmrelease.yml

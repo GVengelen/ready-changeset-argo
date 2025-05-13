@@ -1,0 +1,12 @@
+{
+  "packages": {
+    "charts/base": {
+      "package-name": "base-helm",
+      "release-type": "helm",
+      "bump-minor-pre-major": false,
+      "bump-patch-for-minor-pre-major": false,
+      "include-v-in-tag": false
+    }
+   
+  }
+}

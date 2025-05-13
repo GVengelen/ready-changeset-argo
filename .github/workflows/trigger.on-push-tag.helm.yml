@@ -1,0 +1,51 @@
+name: Push Helm Tag
+on:
+  push:
+    tags:
+      - "base-helm-*.*.*"
+      - "docs-helm-*.*.*"
+      - "web-helm-*.*.*"
+
+# Alow only one of this workflow to run at a time, cancelling runs in progress
+# if the same tag is pushed
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  normalize_tag:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.generate_tag.outputs.tag }}
+      app: ${{ steps.generate_tag.outputs.app }}
+    steps:
+      - id: generate_tag
+        run: |
+          tagname=${{ github.ref_name }}
+          # Extract the app name (everything before '@')
+          app=$(echo ${tagname} | cut -d'-' -f 1)
+          # Replace '/' with '-' in the tag and strip leading 'v'
+          # Then strip everything before the '@' to get the version
+          formatted_tag=$(echo ${tagname} | cut -d'-' -f 3)
+          
+          echo "App name: $app"
+          echo "Formatted tag: $formatted_tag"
+          
+          # Set the outputs for app name and tag
+          echo "app=$app" >> $GITHUB_OUTPUT
+          echo "tag=$formatted_tag" >> $GITHUB_OUTPUT
+
+  # Build and push acc charts
+  build-tst:
+    needs: [normalize_tag]
+    strategy:
+      fail-fast: true
+    uses: ./.github/workflows/action.helmpackage.yml
+    secrets: inherit
+    with:
+      path: charts/${{ needs.normalize_tag.outputs.app }}
+      environment: testing
+      helm_version: ${{ needs.normalize_tag.outputs.tag }}
+      name: ${{ needs.normalize_tag.outputs.app }}
+
+

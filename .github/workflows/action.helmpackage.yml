@@ -1,0 +1,46 @@
+name: Helm Release
+on:
+  workflow_call:
+    inputs:
+      path:
+        description: 'Helm Chart path'
+        required: true
+        type: string
+      environment:
+        type: string
+        required: true
+      helm_version:
+        description: A valid SemVer 2 version string. This will be the version of the helm chart image on the repository
+        type: string
+        required: true
+      name:
+        type: string
+        required: true
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: "${{github.head_ref || github.ref }}"
+
+      - uses: azure/setup-helm@v4.2.0
+
+      - name: Log in to GitHub Container Registry (ghcr.io)
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Package and Push Helm Chart to ghcr.io
+        run: |
+          cd ${{ inputs.path }}
+          helm package . --version ${{ inputs.helm_version }} --dependency-update
+          helm push ${{ inputs.name }}-${{ inputs.helm_version }}.tgz oci://ghcr.io/${{ github.repository_owner }}/helm
