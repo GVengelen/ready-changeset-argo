@@ -18,11 +18,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       
+      - name: Get Token
+        id: get_workflow_token
+        uses: peter-murray/workflow-application-token-action@v4
+        with:
+          application_id: ${{ secrets.APPLICATION_ID }}
+          application_private_key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
+
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          token: ${{ secrets.TAG_AUTOMATION }}
+          token: ${{ steps.get_workflow_token.outputs.token }}
 
       - name: Configure Git
         run: |
@@ -52,7 +59,7 @@ jobs:
           commitMode: git-cli
         env:
           PNPM_HOME: /runner/setup-pnpm/node_modules/.bin
-          GITHUB_TOKEN: ${{ secrets.TAG_AUTOMATION }}
+          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
       
       - name: Tag Release
         if: steps.changesets.outputs.hasChangesets == 'false' && contains(github.event.head_commit.message, 'Version Packages')

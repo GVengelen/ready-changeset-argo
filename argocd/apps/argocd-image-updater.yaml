@@ -19,13 +19,7 @@ spec:
 
               {{ range .AppChanges -}}
               updates image "{{ .Image }}" tag "{{ .OldTag }}" to "{{ .NewTag }}"
-              {{ end -}}        
-            registries:
-            - name: GHCR
-              api_url: https://ghcr.io/gvengelen/
-              prefix: ghcr.io/gvengelen
-              default: true
-              credentials: secret:argocd/github-push-token#token
+              {{ end -}}
             applicationsAPIKind: kubernetes
             logLevel: info
             gitCommitUser: "argocd-bot"
