@@ -32,12 +32,19 @@ jobs:
 
       - uses: azure/setup-helm@v4.2.0
 
+      - name: Get GitHub App Token
+        id: get_workflow_token
+        uses: peter-murray/workflow-application-token-action@v4
+        with:
+          application_id: ${{ secrets.APPLICATION_ID }}
+          application_private_key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
+
       - name: Log in to GitHub Container Registry (ghcr.io)
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ steps.get_workflow_token.outputs.token }}
 
       - name: Package and Push Helm Chart to ghcr.io
         run: |
