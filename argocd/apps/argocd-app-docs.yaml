@@ -19,6 +19,7 @@ spec:
       targetRevision: HEAD
       ref: values
     - repoURL: 'oci://ghcr.io/gvengelen/helm/docs'
+      chart: docs
       targetRevision: "*"
       helm:
         valueFiles:
