@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/GVengelen/ready-changeset-argo/compare/web-helm-0.2.0...web-helm-0.2.1) (2025-05-13)
+
+
+### Bug Fixes
+
+* update next-app version to 0.2.3 in Chart.yaml files ([1c1512f](https://github.com/GVengelen/ready-changeset-argo/commit/1c1512ff5b5c9fbc555a383e94dc7cced82aef5c))
+
 ## [0.2.0](https://github.com/GVengelen/ready-changeset-argo/compare/web-helm-0.1.0...web-helm-0.2.0) (2025-05-13)
 
 
