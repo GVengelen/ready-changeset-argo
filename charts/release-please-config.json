@@ -14,7 +14,7 @@
       "bump-patch-for-minor-pre-major": false,
       "include-v-in-tag": false
     },
-     "charts/dev": {
+     "charts/docs": {
       "package-name": "docs-helm",
       "release-type": "helm",
       "bump-minor-pre-major": false,
