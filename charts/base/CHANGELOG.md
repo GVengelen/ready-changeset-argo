@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/GVengelen/ready-changeset-argo/compare/base-helm-0.2.1...base-helm-0.2.2) (2025-05-13)
+
+
+### Bug Fixes
+
+* revert chart version from 0.2.1 to 0.2.0 in Chart.yaml ([a1c1364](https://github.com/GVengelen/ready-changeset-argo/commit/a1c13647a4d74a00f3d60776640c02042b63579c))
+
 ## [0.2.1](https://github.com/GVengelen/ready-changeset-argo/compare/base-helm-0.2.0...base-helm-0.2.1) (2025-05-13)
 
 
