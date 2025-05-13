@@ -1,5 +1,11 @@
 # docs
 
+## 0.22.0
+
+### Minor Changes
+
+- 59d7a14: feat: remove explenation marks
+
 ## 0.21.0
 
 ### Minor Changes
