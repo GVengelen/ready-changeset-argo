@@ -1,5 +1,11 @@
 # web
 
+## 0.7.0
+
+### Minor Changes
+
+- 9344fde: feat: add correct content
+
 ## 0.6.0
 
 ### Minor Changes
