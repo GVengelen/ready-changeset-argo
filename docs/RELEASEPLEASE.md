@@ -171,15 +171,26 @@ stringData:
   type: helm
 ```
 
-Apply the secret to your ArgoCD namespace:
-
-```sh
-kubectl apply -f argocd/apps/argocd-repo-demo-secret.yaml
-```
+ArgoCD wil sync this and does not require a manual `kubectl apply` step.
 
 ## Update ArgoCD applications
 
 Update your ArgoCD app manifests (for example, `argocd/apps/argocd-app-web.yaml`, `argocd-app-docs.yaml`) to reference the new chart versions and the OCI registry.
+
+```yaml
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/GVengelen/ready-changeset-argo.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: "ghcr.io/gvengelen/helm"
+      chart: docs
+      targetRevision: "*"
+      helm:
+        valueFiles:
+          - $values/argocd/values/argocd-app-docs.yaml
+```
 
 Sync the apps in ArgoCD to deploy the new chart versions.
 
