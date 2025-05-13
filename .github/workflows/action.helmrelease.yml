@@ -18,13 +18,12 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Generate a token
+      - name: Get Token
         id: get_workflow_token
-        uses: actions/create-github-app-token@v1
+        uses: peter-murray/workflow-application-token-action@v4
         with:
-          app-id:  ${{ secrets.APPLICATION_ID }}
-          private-key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
+          application_id: ${{ secrets.APPLICATION_ID }}
+          application_private_key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
 
       - name: Release Helm chart using release-please
         uses: googleapis/release-please-action@v4
