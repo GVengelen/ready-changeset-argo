@@ -2,6 +2,6 @@ fullnameOverride: web
 image:
   repository: ghcr.io/gvengelen/ready-changeset-argo-web
   namee: ready-changeset-argo-web
-  tag: f35e2bd
+  tag: a4ea1a3
 service:
   port: 3000
