@@ -3,6 +3,6 @@ next-app:
   image:
     repository: ghcr.io/gvengelen/ready-changeset-argo-web
     namee: ready-changeset-argo-web
-    tag: d98892b
+    tag: 1e51a1d
   service:
     port: 3000
