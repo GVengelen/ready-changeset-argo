@@ -1,7 +1,8 @@
 fullnameOverride: docs
-image:
-  repository: ghcr.io/gvengelen/ready-changeset-argo-docs
-  namee: ready-changeset-argo-docs
-  tag: d98892b
-service:
-  port: 3000
+next-app:
+  image:
+    repository: ghcr.io/gvengelen/ready-changeset-argo-docs
+    namee: ready-changeset-argo-docs
+    tag: d98892b
+  service:
+    port: 3000
