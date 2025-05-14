@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/GVengelen/ready-changeset-argo/compare/web-helm-0.2.1...web-helm-0.3.0) (2025-05-14)
+
+
+### Features
+
+* comments ([ba592ac](https://github.com/GVengelen/ready-changeset-argo/commit/ba592acb9085aedf4c7bd2a737b39d6ea1372151))
+
 ## [0.2.1](https://github.com/GVengelen/ready-changeset-argo/compare/web-helm-0.2.0...web-helm-0.2.1) (2025-05-13)
 
 

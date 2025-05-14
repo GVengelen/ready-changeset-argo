@@ -1,5 +1,5 @@
 {
   "charts/base": "0.2.3",
-  "charts/web": "0.2.1",
-  "charts/docs": "0.2.1"
+  "charts/web": "0.3.0",
+  "charts/docs": "0.3.0"
 }
